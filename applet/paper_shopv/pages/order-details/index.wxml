@@ -97,4 +97,15 @@
                 <view class="right-text">¥ {{orderDetail.orderInfo.amountReal}}</view>
             </view>
         </view>
+
+        <view class="goods-info">
+            <view class="row-box" wx:if="{{orderDetail.delivery}}">
+                <view class="row-label"> 配送人电话</view>
+                <view class="right-text" data-phone="{{orderDetail.delivery.delivery_mobile}}" bindtap="calling"> {{orderDetail.delivery.delivery_mobile}}</view>
+            </view>
+            <view class="row-box" wx:if="{{orderDetail.kefu}}">
+                <view class="row-label"> 客服电话</view>
+                <view class="right-text" data-phone="{{orderDetail.kefu.phone}}" bindtap="calling"> {{orderDetail.kefu.phone}}</view>
+            </view>
+        </view>
 </view>

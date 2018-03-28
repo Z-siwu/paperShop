@@ -26,6 +26,19 @@ class GoodDetail extends Resource
                 'pic' => config('filesystems.disks.admin.url').'/'.$this->goods_main_image
             ];
         }
+        if (!empty($this->goods_carousel)) {
+            $carouselPic = $this->goods_carousel;
+            foreach ($carouselPic as $eachPic) {
+                $carouselPics[] = [
+                    'pic' => config('filesystems.disks.admin.url').'/'.$eachPic
+                ];
+            }
+        } else {
+            $carouselPics[] = [
+                'pic' => config('filesystems.disks.admin.url').'/'.$this->goods_main_image
+            ];
+        }
+
         $content = '';
         foreach ($pics as $eachPic) {
             $content .= '<div><img src="'.$eachPic['pic'].'"></div>';
@@ -34,6 +47,7 @@ class GoodDetail extends Resource
         return [
             'id' => $this->id,
             'pics' => $pics,
+            'carousel' => $carouselPics,
             'basicInfo' => [
                 'id' => $this->id,
                 'name' => $this->goods_name,

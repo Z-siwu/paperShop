@@ -81,7 +81,7 @@ class Buy
         $goodsCartList = \GuzzleHttp\json_decode($goodsJsonStr, true);
         $goodsIds = array_column($goodsCartList, 'goodsId');
         $goodsNums = array_column($goodsCartList, 'number', 'goodsId');
-        $goodsArr = Good::whereIn('id', $goodsIds)->get();// 获取商品的详细信息
+        $goodsArr = Good::whereIn('id', $goodsIds)->where('goods_state', '=', 1)->get();// 获取商品的详细信息
         $all_price = 0.00;// 订单总价格
         foreach ($goodsArr as $gc_key => &$gc_val) {
             $gc_val['number'] = $goodsNums[$gc_val['id']];
@@ -185,6 +185,7 @@ class Buy
                     'goods_desc' => $va['goods_desc'] ? $va['goods_desc'] : '',
                     'num' => $va['number'],
                 ];
+                $this->addSaleNum($va['id'],$va['number'] );
             }
         }
         $order_goods_model = DB::table('order_goods')->insert($order_goods_insert);
@@ -197,6 +198,9 @@ class Buy
         }
     }
 
+    public function addSaleNum($id,$num = 1){
+        DB::table('goods')->where('id',$id)->increment('goods_salenum', $num);
+    }
 
     /**
      * 价格格式化

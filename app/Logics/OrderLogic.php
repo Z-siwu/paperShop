@@ -294,12 +294,17 @@ class OrderLogic
                 }
             }
             $resaultFlag = true;
+            $delivery = Delivery::where('oid',$orderID)->first();
             $finalOrderList['amount'] = $totalPrice;
-
             $resaultData = [
                 'orderInfo' => $finalOrderList,
                 'goodsList' => $goodsList,
+                'delivery' => empty($delivery->delivery_mobile)?'':$delivery->toArray(),
+                'kefu' =>[
+                    'phone' => '13527589747'
+                ]
             ];
+
 
         } catch (\Exception $e) {
             $resaultData = $e->getMessage();

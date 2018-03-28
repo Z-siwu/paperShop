@@ -43,7 +43,7 @@ class Special extends Model
      */
     static public function getSpecialList($where = [])
     {
-        return static::where([
+        return static::select('id as nav_id', 'class_id as id','special_title')->where([
             ['if_show', '=', static::IFSHOW_YES]
         ])->orderBy('sort', 'ASC')->get();
     }

@@ -22,6 +22,9 @@ Route::group([
     //用户收货地址管理(仅查看)
     $router->resource('addresses', AddressController::class);
 
+    // 前台用户管理
+    $router->resource('User', UsersController::class);
+
     //学校管理
     $router->resource('School', SchoolController::class);
     // 宿舍管理
@@ -36,5 +39,6 @@ Route::group([
     $router->get('/orders/{id}/delivery', 'OrderController@delivery');
     $router->resource('orders', OrderController::class);
 
-
+    //前端用户管理
+    $router->resource('front-users', FrontEndUserController::class);
 });

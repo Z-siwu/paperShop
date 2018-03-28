@@ -15,7 +15,7 @@ class GoodsController extends ApiController
      */
     public function index(Request $request)
     {
-        $where = array();
+        $where[] = ['goods_state','=',1];
         if ($request->input('categoryId')) {
             $where[] = ['class_id', '=', $request->input('categoryId')];
         }

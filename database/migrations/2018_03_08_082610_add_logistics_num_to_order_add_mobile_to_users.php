@@ -16,7 +16,7 @@ class AddLogisticsNumToOrderAddMobileToUsers extends Migration
         //
         if (!Schema::hasColumn('users', 'mobile')) {
             Schema::table('users', function (Blueprint $table) {
-                $table->integer('mobile')->default(0)->comment('用户手机号');
+                $table->string('mobile',11)->nullable(false)->default('')->comment('用户手机号');
             });
         }
         if (!Schema::hasColumn('order', 'logistics_num')) {

@@ -12,7 +12,7 @@ use App\Logic\OrderLogic;
 class OrderInfoController extends ApiController
 {
     private $statusConfig = [
-        10, 22, [26, 32], 40
+        [10], [22], [26, 32], [40]
     ];
 
     // 订单列表
@@ -25,8 +25,8 @@ class OrderInfoController extends ApiController
             return $this->failed('用户未登录', 401);
         }
         $condition['uid'] = $user_id;
-        $condition['status'] = $this->statusConfig[$request->input('status', 0)];
-        $orders_info = Order::getOrderAndOrderGoodsList($condition);
+        $conditionIn= $this->statusConfig[$request->input('status', 0)];
+        $orders_info = Order::getOrderAndOrderGoodsList($condition,$conditionIn);
 
         $out_info = [];
         foreach ($orders_info as $k => &$order) {

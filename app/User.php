@@ -12,7 +12,14 @@ class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;
 
+    const USER_ROLE_ZERO = 0;
+    const USER_ROLE_NORMAL = 1;//正常用户
     const USER_ROLE_DELIVERY = 2;//配送员
+
+    const USER_ROLE_ZERO_STRING = '空';
+    const USER_ROLE_NORMAL_STRING = '正常用户';//正常用户
+    const USER_ROLE_DELIVERY_STRING = '配送员';//配送员
+
 
     /**
      * The attributes that are mass assignable.
@@ -20,7 +27,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','openid','nickname','avatar','unionid','login_ip','login_time',
+
+        'name', 'email', 'password','openid','nickname','avatar','unionid','login_ip','login_time','role','mobile',
     ];
 
     /**
@@ -29,7 +37,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token','state','role',
+        'password', 'remember_token','state',
     ];
 
     public function dorms()
@@ -42,5 +50,14 @@ class User extends Authenticatable
         $q = \Auth::user()->openid;
         return User::where('openid', $q)->get();
 
+    }
+
+    public static function getRoleDisplayMap()
+    {
+        return [
+            // self::USER_ROLE_ZERO => self::USER_ROLE_ZERO_STRING,
+            self::USER_ROLE_NORMAL => self::USER_ROLE_NORMAL_STRING,
+            self::USER_ROLE_DELIVERY => self::USER_ROLE_DELIVERY_STRING,
+        ];
     }
 }

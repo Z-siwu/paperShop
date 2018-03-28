@@ -15,11 +15,10 @@ class Carousel extends Resource
     public function toArray($request)
     {
         return [
-            "businessId"=>$this->id,
+            "businessId"=>$this->goods_id,
             "type"=> $this->booth_type,
             "title"=> $this->carousel_title,
             "picUrl"=> config('filesystems.disks.admin.url').'/'.$this->carousel_img,
-            "link"=> $this->carousel_link,
             "info"=> $this->carousel_info,
             "state"=> $this->state,
         ];

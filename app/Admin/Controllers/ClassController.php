@@ -97,6 +97,9 @@ class ClassController extends Controller
                 $filter->equal('class_state', '状态')
                     ->radio(Classes::getStateDisplayMap());
             });
+            $grid->actions(function ($actions) {
+                $actions->disableDelete();
+            });
         });
     }
 

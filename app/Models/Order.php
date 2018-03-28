@@ -99,9 +99,9 @@ class Order extends Model
     /**
      * 获取订单 及 订单商品列表
      */
-    public static function getOrderAndOrderGoodsList($condition)
+    public static function getOrderAndOrderGoodsList($condition,$conditionIn)
     {
-        return static::with('orderGoods')->where($condition)->orderBy('id', 'desc')->get();
+        return static::with('orderGoods')->where($condition)->whereIn('status', $conditionIn)->orderBy('id', 'desc')->get();
     }
 
     /**

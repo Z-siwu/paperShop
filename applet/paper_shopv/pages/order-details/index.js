@@ -53,6 +53,11 @@ Page({
        */
      
     },
+    calling: function (e) {
+      wx.makePhoneCall({
+        phoneNumber: e.currentTarget.dataset.phone,
+      })
+    }, 
     wuliuDetailsTap:function(e){
       var orderId = e.currentTarget.dataset.id;
       wx.navigateTo({

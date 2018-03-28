@@ -40,7 +40,23 @@ class Good extends Model
     public function setGoodsDescriptionPicturesAttribute($pictures)
     {
         if (is_array($pictures)) {
-            $this->attributes['goods_description_pictures'] = json_encode($pictures);
+            $this->attributes['goods_carousel'] = json_encode($pictures);
+        }
+    }
+
+    public function getGoodsCarouselAttribute($pictures)
+    {
+        if (is_string($pictures)) {
+            return json_decode($pictures, true);
+        }
+
+        return $pictures;
+    }
+
+    public function setGoodsCarouselAttribute($pictures)
+    {
+        if (is_array($pictures)) {
+            $this->attributes['goods_carousel'] = json_encode($pictures);
         }
     }
 

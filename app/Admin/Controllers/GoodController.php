@@ -85,7 +85,9 @@ class GoodController extends Controller
             $grid->goods_onsaleprice('折扣价');
             $grid->goods_salenum('销售量');
             $grid->goods_click('点击量');
+            $grid->goods_carousel('轮播图片')->image('', 50, 50);
             $grid->goods_description_pictures('描述图片')->image('', 50, 50);
+
 //            $grid->goods_storage('库存');
             $grid->goods_state('状态')
                 ->select(Good::getStateDispayMap());
@@ -142,10 +144,14 @@ class GoodController extends Controller
                 ->rules('required')
                 ->uniqueName() ;
 
+            $form->multipleImage('goods_carousel', '轮播图片')
+                ->uniqueName();
+
             $form->textarea('goods_desc', '描述');
 
             $form->multipleImage('goods_description_pictures', '描述图片')
                 ->uniqueName();
+
 //            $form->number('goods_storage', '库存');
             $form->radio('goods_state', '状态')
                 ->options(Good::getStateDispayMap())
